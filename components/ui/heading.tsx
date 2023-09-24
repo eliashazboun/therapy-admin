@@ -1,7 +1,7 @@
 
 interface HeadingProps{
   title:string;
-  description:string;
+  description?:string;
 }
 
 export const Heading : React.FC<HeadingProps> = ({

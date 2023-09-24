@@ -1,42 +1,84 @@
-"use client"
-import React from 'react'
+"use client";
+import React, { useEffect, useState } from "react";
+import * as ReactDOM from "react-dom";
 
 import {
-  Week, Month, Agenda, ScheduleComponent, ViewsDirective, ViewDirective, EventSettingsModel, ResourcesDirective, ResourceDirective, Inject, Resize, DragAndDrop
-} from '@syncfusion/ej2-react-schedule';
-import { timelineResourceData } from './(test)/datasource';
+  ScheduleComponent,
+  Day,
+  Week,
+  Month,
+  Agenda,
+  Inject,
+  ViewDirective,
+  ViewsDirective,
+  EventSettingsModel,
+  ActionEventArgs,
+  DragAndDrop,
+  Resize,
+} from "@syncfusion/ej2-react-schedule";
+import { timelineResourceData } from "./datasource";
+import { Heading } from "@/components/ui/heading";
+import { Separator } from "@/components/ui/separator";
+import { DataManager, ODataV4Adaptor } from "@syncfusion/ej2-data";
+import { useOrigin } from "@/hooks/use-origin";
 
-const CalendarPage = () => {
-  const eventSettings: EventSettingsModel = { dataSource: timelineResourceData }
-  const group = { byGroupID: false, resources: ['Projects', 'Categories'] }
+const CalendarPage = ({ params }: { params: { practiceId: string } }) => {
+  //   const [dataManager, setDataManager] = useState<DataManager | null>(null);
 
-  const projectData: Object[] = [
-    { text: 'PROJECT 1', id: 1, color: '#cb6bb2' },
-  ];
-  const categoryData: Object[] = [
-    { text: 'Development', id: 1, color: '#1aaa55' },
-  ];
+  //   const origin = window.location.origin;
+  //   console.log("🚀 ~ file: page.tsx:28 ~ origin:", origin);
+  //   console.log(
+  //     "🚀 ~ file: page.tsx:37 ~ fetchData ~ params.practiceId:",
+  //     params.practiceId
+  //   );
+  //   console.log(`${origin}/api/${params.practiceId}/appointments`);
+
+  //   const onActionBegin = (args:ActionEventArgs) => {
+  //     if(args.requestType === "eventCreate") {
+  //       console.log('DATA ARGS',args.data);
+  //       console.log('DATA ARGS',args.requestType);
+  //   }
+  // }
+
+  //   useEffect(() => {
+  //     const fetchData = async () => {
+  //       const manager = new DataManager({
+  //         url: `${origin}/api/${params.practiceId}/appointments/`,
+  //         crudUrl:`${origin}/api/${params.practiceId}/appointments/$batch`,
+  //         adaptor: new ODataV4Adaptor(),
+  //       });
+  //       await manager.ready;
+  //       console.log(manager.dataSource);
+  //       setDataManager(manager);
+  //     };
+  //     fetchData();
+  //   }, []);
+
   return (
-    <>
-    <h2 className=''>Syncfusion React Schedule Component</h2>
-    <ScheduleComponent className='mt-20 mr-20' width='100%' height='550px' currentView='Month' selectedDate={new Date(2018, 3, 4)} eventSettings={eventSettings} group={group} >
-      <ViewsDirective>
-        <ViewDirective option='Week' />
-        <ViewDirective option='Month' />
-        <ViewDirective option='Agenda' />
-      </ViewsDirective>
-      <ResourcesDirective>
-        <ResourceDirective field='ProjectId' title='Choose Project' name='Projects' allowMultiple={false}
-          dataSource={projectData} textField='text' idField='id' colorField='color'>
-        </ResourceDirective>
-        <ResourceDirective field='TaskId' title='Category' name='Categories' allowMultiple={true}
-          dataSource={categoryData} textField='text' idField='id' colorField='color'>
-        </ResourceDirective>
-      </ResourcesDirective>
-      <Inject services={[Week, Month, Agenda, Resize, DragAndDrop]} />
-    </ScheduleComponent>
-  </>
-  )
-}
+    <div>
+      <div className="ml-10 mr-10 pb-10 pt-5">
+        <Heading
+          title="Calendar Page"
+          description="Create and manage your appointments from here."
+        />
+        <Separator />
+      </div>
+      <ScheduleComponent
+        className="ml-10 mr-10 text-center"
+        selectedDate={new Date()}
+        enablePersistence={true}
+        allowDragAndDrop
+      >
+        <ViewsDirective>
+          <ViewDirective option="Day" />
+          <ViewDirective option="Week" />
+          <ViewDirective option="Month" />
+          <ViewDirective option="Agenda" />
+        </ViewsDirective>
+        <Inject services={[Day, Week, Month, Agenda, DragAndDrop, Resize]} />
+      </ScheduleComponent>
+    </div>
+  );
+};
 
-export default CalendarPage
+export default CalendarPage;

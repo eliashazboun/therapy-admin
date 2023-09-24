@@ -4,6 +4,11 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { ToastProvider } from "@/providers/toast-provider";
 import { ModalProvider } from "@/providers/modal-provider";
 
+import { registerLicense } from "@syncfusion/ej2-base";
+registerLicense(
+  "Ngo9BigBOggjHTQxAR8/V1NHaF5cXmVCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdgWXZccnVWR2dYVk1/V0s="
+);
+
 import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 

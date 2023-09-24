@@ -1,9 +1,15 @@
+"use client";
+
+import UnderDevelopment from "@/components/under-development";
 
 const DashboardPage = () => {
+
+
   return (
-    <div className="flex justify-start w-full">
-      <h1 className="text-3xl font-bold ">Main Dashboard Mofo</h1>
-    </div>
+    <div className="w-full">
+      <UnderDevelopment pageName="Dashboard" />
+    
+  </div>
   )
 }
 

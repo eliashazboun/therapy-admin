@@ -60,7 +60,7 @@ const Navbar: React.FC<NavbarProps> = ({ name }) => {
     <div className="flex">
       <div
         className={`${
-          open ? "w-72" : "w-11"
+          open ? "w-60" : "w-11"
         } duration-300 flex flex-col p-5 pt-8 items-center  border-r  h-screen relative`}
       >
         <div

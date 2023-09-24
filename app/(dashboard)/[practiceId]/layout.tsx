@@ -31,7 +31,7 @@ export default async function DashboardLayout({
  
 
   return(
-    <div className="flex">
+    <div className="flex w-full">
       <Navbar name={practice.name}/>
       {children}
     </div>

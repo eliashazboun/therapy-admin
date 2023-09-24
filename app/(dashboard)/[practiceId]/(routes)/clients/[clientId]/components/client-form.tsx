@@ -152,8 +152,11 @@ const ClientForm: React.FC<ClientFormProps> = ({ initialData }) => {
         onConfirm={onDelete}
         loading={loading}
       />
-      <div className="flex  items-center justify-center text-center">
+      <div className="flex  items-center justify-between text-center">
+        <div>
+        </div>
         <Heading title={title} description={description} />
+        <div>
         {initialData && (
           <Button
             disabled={loading}
@@ -164,7 +167,10 @@ const ClientForm: React.FC<ClientFormProps> = ({ initialData }) => {
             <Trash className="h-4 w-4" /> Delete
           </Button>
         )}
+
+        </div>
       </div>
+      
       <Separator />
       <div className="flex min-h-screen flex-col items-center ">
         <Form {...form}>
