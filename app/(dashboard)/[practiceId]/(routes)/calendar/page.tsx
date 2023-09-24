@@ -2,9 +2,12 @@
 import React, { useEffect, useState } from "react";
 import * as ReactDOM from "react-dom";
 
+import {registerLicense} from '@syncfusion/ej2-base'
+registerLicense(process.env.SYNCFUSION_LICENSE || "")
+
 import {
   ScheduleComponent,
-  Day,
+  Day, 
   Week,
   Month,
   Agenda,
