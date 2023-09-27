@@ -9,7 +9,7 @@ const Container = ({
   className?: string
 }) => {
   return (
-    <div className={cn('p-16',className)}>
+    <div className={cn('p-10',className)}>
       {children}
     </div>
   )

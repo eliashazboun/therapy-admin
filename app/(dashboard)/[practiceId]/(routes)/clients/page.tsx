@@ -30,9 +30,7 @@ const ClientsPage = async ({
     <div className="flex-col w-full">
       <div className="flex-1 space-y-4 p-8 pt-6">
         <ClientClient data={formattedClients}/>
-
       </div>
-       
         <Separator className="mb-5"/>
 
        
@@ -41,3 +39,5 @@ const ClientsPage = async ({
 };
 
 export default ClientsPage;
+
+

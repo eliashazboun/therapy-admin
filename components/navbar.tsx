@@ -93,11 +93,12 @@ const Navbar: React.FC<NavbarProps> = ({ name }) => {
         </div>
         <div className="pt-16 flex flex-col gap-2">
           {routes.map((route,idx) => (
-            <>
+            <div key={idx}>
             {idx === 0 && <Separator/>}
             <Link
+              onClick={route.label === "Dashboard" ? (() => window.location.href = route.href):() => {}}
               href={route.href}
-              key={route.href}
+              
               className={cn("flex rounded-md p-2 cursor-pointer hover:bg-blue-200 items-center gap-x-4 gap-y-5",
                 route.active && "bg-blue-200 underline")}
             >
@@ -106,7 +107,7 @@ const Navbar: React.FC<NavbarProps> = ({ name }) => {
 
             </Link>
             <Separator/>
-            </>
+            </div>
           ))}
 
         </div>

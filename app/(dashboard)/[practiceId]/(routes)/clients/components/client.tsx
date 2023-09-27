@@ -7,11 +7,15 @@ import { Plus } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { DataTable } from "@/components/ui/data-table";
 import { columns } from "./columns";
+import GenerateRandomUser from "@/components/gen-random";
 
 interface ClientClientProps {
   data: ClientColumn[];
 }
-export const ClientClient: React.FC<ClientClientProps> = ({ data }) => {
+export const ClientClient: React.FC<ClientClientProps> = ({ 
+  data,
+   
+}) => {
   const router = useRouter();
   const params = useParams();
 
@@ -28,6 +32,7 @@ export const ClientClient: React.FC<ClientClientProps> = ({ data }) => {
           <Plus className="h-4 w-4 mr-2" />
           Add New Client
         </Button>
+        <GenerateRandomUser practiceId={params.practiceId}/>
       </div>
       <Separator/>
       <DataTable columns={columns} data={data} searchKey="name"/>
