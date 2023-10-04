@@ -17,8 +17,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { Disorders } from "@prisma/client"
 
-const frameworks = [
+const options = [
   {
     value: "next.js",
     label: "Next.js",
@@ -41,9 +42,18 @@ const frameworks = [
   },
 ]
 
-export function Combobox() {
+interface ComboBoxProps{
+  className?: string;
+  options: {label: string, id: string}[];
+}
+
+export function Combobox({
+  className, 
+  options
+}: ComboBoxProps) {
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState("")
+  const filteredOptions = options.filter((disorder) => disorder.label.toLowerCase().includes(value.toLowerCase()))
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -52,22 +62,22 @@ export function Combobox() {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className={cn("w-[200px] justify-between", className)}
         >
           {value
-            ? frameworks.find((framework) => framework.value === value)?.label
-            : "Select framework..."}
+            ? options.find((disorder) => disorder.id === value)?.label
+            : "Select disorrder..."}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className={cn("w-[200px] p-0",className)}>
         <Command>
-          <CommandInput placeholder="Search framework..." />
-          <CommandEmpty>No framework found.</CommandEmpty>
+          <CommandInput placeholder="Search disorders..." />
+          <CommandEmpty>No disorder found.</CommandEmpty>
           <CommandGroup>
-            {frameworks.map((framework) => (
+            {filteredOptions.map((disorder) => (
               <CommandItem
-                key={framework.value}
+                key={disorder.id}
                 onSelect={(currentValue) => {
                   setValue(currentValue === value ? "" : currentValue)
                   setOpen(false)
@@ -76,10 +86,10 @@ export function Combobox() {
                 <Check
                   className={cn(
                     "mr-2 h-4 w-4",
-                    value === framework.value ? "opacity-100" : "opacity-0"
+                    value === disorder.id ? "opacity-100" : "opacity-0"
                   )}
                 />
-                {framework.label}
+                {disorder.label}
               </CommandItem>
             ))}
           </CommandGroup>

@@ -8,10 +8,15 @@ export async function getClientDetails(clientId: string, practiceId: string) {
         id: clientId,
         practiceId: practiceId,
       },
+      include:{
+        disorders: true,
+        medications: true,
+        contacts: true,
+        
+      }
     });
     return client;
   } catch (err: any) {
-    console.log("[CLIENT_GET]", err);
     return null;
   }
 }

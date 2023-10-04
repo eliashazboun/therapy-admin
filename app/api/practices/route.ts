@@ -36,3 +36,24 @@ export async function POST(
   }
 
 }
+
+//create a get function that returns the names of all of the practices
+export async function GET(
+  req: Request,
+){
+  try{
+   
+
+    const practices = await prismadb.practice.findMany({
+      select:{
+        name: true,
+      }
+    })
+
+    return NextResponse.json(practices)
+
+  }catch(err){
+    console.log("[PRACTICES_GET]",err)
+    return new NextResponse("Internal error", { status: 500 })
+  }
+}

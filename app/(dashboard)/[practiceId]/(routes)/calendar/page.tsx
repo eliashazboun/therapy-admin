@@ -16,6 +16,7 @@ import {
   ActionEventArgs,
   DragAndDrop,
   Resize,
+  PopupOpenEventArgs,
 } from "@syncfusion/ej2-react-schedule";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
@@ -162,6 +163,8 @@ const CalendarPage = ({ params }: { params: { practiceId: string } }) => {
     }
   };
 
+ 
+
   return (
     <div>
       <div className="ml-10 mr-10 pb-10 pt-5">
@@ -178,6 +181,7 @@ const CalendarPage = ({ params }: { params: { practiceId: string } }) => {
         enablePersistence={true}
         enableRecurrenceValidation={false}
         showQuickInfo={true}
+
         actionComplete={actionComplete}
         eventSettings={eventSettings}
         allowDragAndDrop={true}

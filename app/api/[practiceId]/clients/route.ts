@@ -1,3 +1,4 @@
+import { getRandomLanguage } from "@/app/consts/languages";
 import prismadb from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
@@ -37,6 +38,8 @@ export async function POST(
       street,
       city,
       country,
+      profilePicture
+      
     } = body;
 
     if (!userId) return new NextResponse("Unathenticated", { status: 401 });
@@ -67,6 +70,8 @@ export async function POST(
         street,
         country,
         practiceId: params.practiceId,
+        profilePicture,
+        prefferedLanguage: getRandomLanguage(),
       },
     });
 

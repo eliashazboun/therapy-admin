@@ -90,3 +90,12 @@ export type Person = {
   nat: string;
 }
 
+export interface EmergencyModalPerson{
+  firstName:string,
+  lastName:string,
+  email:string,
+  phone:string,
+  relationship:string,
+  id:string,
+}
+

@@ -16,14 +16,16 @@ export default async function DashboardLayout({
   if(!userId){
     redirect('/sign-in')
   }
-  const user = await currentUser();
 
+
+  
   const practice = await prismadb.practice.findFirst({
     where:{
       id: params.practiceId,
       userId
     }
   });
+
 
   if(!practice){
     redirect('/')

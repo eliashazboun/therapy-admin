@@ -5,7 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import { AlertModal } from "@/components/modals/alert-modal";
 import toast from "react-hot-toast";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
-import { Copy, Edit, Trash } from "lucide-react";
+import { Copy, Edit, Eye, Trash } from "lucide-react";
 import axios from "axios";
 
 interface CellActionProps {
@@ -48,6 +48,19 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
         loading={loading}
       />
       <div className="flex">
+      <TooltipComponent
+          position="TopCenter"
+          content={"View Client"}
+          target="#view"
+        >
+          <div
+            id="view"
+            onClick={() => {router.push(`/${params.practiceId}/clientInfo/${data.id}`)}}
+            className=" hover:bg-gray-200 flex justify-center items-center rounded-md p-1 w-fit cursor-pointer "
+          >
+            <Eye className="h-4 w-4 " />{" "}
+          </div>
+        </TooltipComponent>
         <TooltipComponent
           position="TopCenter"
           content={"Copy Client ID"}
@@ -79,18 +92,22 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
           </div>
         </TooltipComponent>
 
-        <TooltipComponent position="TopCenter" content={"Delete Client"} target="#delete">
-
-        <div
-          id="delete"
-          onClick={() => {
-            setOpen(true);
-          }}
-          className=" hover:bg-gray-200 flex justify-center items-center rounded-md p-1 w-fit cursor-pointer "
+        <TooltipComponent
+          position="TopCenter"
+          content={"Delete Client"}
+          target="#delete"
         >
-          <Trash className="h-4 w-4 " />{" "}
-        </div>
+          <div
+            id="delete"
+            onClick={() => {
+              setOpen(true);
+            }}
+            className=" hover:bg-gray-200 flex justify-center items-center rounded-md p-1 w-fit cursor-pointer "
+          >
+            <Trash className="h-4 w-4 " />{" "}
+          </div>
         </TooltipComponent>
+        
       </div>
     </>
   );

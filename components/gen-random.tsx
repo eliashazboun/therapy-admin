@@ -15,6 +15,7 @@ const GenerateRandomUser:React.FC<GenerateRandomUserProps> = ({
   const onClick = async () => {
     const response = await fetch('https://randomuser.me/api/')
     const data = await response.json()
+    console.log(data.results[0])
     const person:Person = data.results[0]
 
   // firstName    String
@@ -38,6 +39,7 @@ const GenerateRandomUser:React.FC<GenerateRandomUserProps> = ({
       city: person.location.city,
       street: person.location.street.name,
       country: person.location.country,
+      profilePicture: person.picture.large,
       practiceId: practiceId
     }
 
