@@ -42,23 +42,21 @@ model Client {
   id                String             @id @default(uuid())
   firstName         String
   lastName          String
-  gender            String
-  birthday          DateTime
-  phone             String
+  gender            String?
+  birthday          DateTime?
+  phone             String?
   email             String
-  city              String
-  street            String
-  country           String
-  prefferedLanguage String
+  country           String?
+  prefferedLanguage String?
   profilePicture    String?
   allergies         String[]
   disorders         Disorders[]        @relation("ClientToDisorder")
   medications       Medication[]       @relation("ClientToMedication")
   contacts          EmergencyContact[] @relation("ClientToEmergencyContact")
-  practice          Practice           @relation("PracticeToClient", fields: [practiceId], references: [id])
+  practice          Practice?           @relation("PracticeToClient", fields: [practiceId], references: [id])
   appointments      Appointment[]      @relation("ClientToAppointment")
   notifications     Notification[]     @relation("ClientToNotification")
-  practiceId        String
+  practiceId        String?
   createdAt         DateTime           @default(now())
   updatedAt         DateTime           @updatedAt
 }

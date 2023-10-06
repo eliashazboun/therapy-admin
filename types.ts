@@ -13,7 +13,13 @@ export interface EventObject {
   startEditable?: boolean | null; // Value overriding the eventStartEditable setting for this specific event.
   durationEditable?: boolean | null; // Value overriding the eventDurationEditable setting for this specific event.
   resourceEditable?: boolean | null; // Value overriding the eventResourceEditable setting for this specific event.
-  display?: 'auto' | 'block' | 'list-item' | 'background' | 'inverse-background' | 'none'; // The rendering type of this event.
+  display?:
+    | "auto"
+    | "block"
+    | "list-item"
+    | "background"
+    | "inverse-background"
+    | "none"; // The rendering type of this event.
   overlap?: boolean; // Value overriding the eventOverlap setting for this specific event.
   constraint?: any; // The eventConstraint override for this specific event.
   backgroundColor?: string; // The eventBackgroundColor override for this specific event.
@@ -88,14 +94,72 @@ export type Person = {
     thumbnail: string;
   };
   nat: string;
+};
+
+export interface EmergencyModalPerson {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  relationship: string;
+  id: string;
 }
 
-export interface EmergencyModalPerson{
-  firstName:string,
-  lastName:string,
-  email:string,
-  phone:string,
-  relationship:string,
-  id:string,
+export interface EmailAddress {
+  email_address: string;
+  id: string;
+  linked_to: string[];
+  object: string;
+  verification: {
+    status: string;
+    strategy: string;
+  };
 }
 
+export interface UserData {
+  birthday: string;
+  created_at: number;
+  email_addresses: EmailAddress[];
+  external_accounts: any[]; // Replace with the actual type if available
+  external_id: string;
+  first_name: string;
+  gender: string;
+  id: string;
+  image_url: string;
+  last_name: string;
+  last_sign_in_at: number;
+  object: string;
+  password_enabled: boolean;
+  phone_numbers: any[]; // Replace with the actual type if available
+  primary_email_address_id: string;
+  primary_phone_number_id: string | null;
+  primary_web3_wallet_id: string | null;
+  private_metadata: Record<string, any>; // Replace with the actual type if available
+  profile_image_url: string;
+  public_metadata: Record<string, any>; // Replace with the actual type if available
+  two_factor_enabled: boolean;
+  unsafe_metadata: Record<string, any>; // Replace with the actual type if available
+  updated_at: number;
+  username: string | null;
+  web3_wallets: any[]; // Replace with the actual type if available
+}
+
+export interface UserCreatedObject {
+  data: UserData;
+  object: string;
+  type: string;
+}
+
+export interface UserUpdatedObject extends UserCreatedObject {}
+
+export interface UserDataDeleted {
+  deleted: boolean;
+  id: string;
+  object: string;
+}
+
+export interface UserDeletedObject {
+  data: UserDataDeleted;
+  object: string;
+  type: string;
+}

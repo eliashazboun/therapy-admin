@@ -48,7 +48,7 @@ import toast from "react-hot-toast";
 type ClientFormValues = z.infer<typeof formSchema>;
 
 interface ClientFormProps {
-  initialData: Client | null;
+  initialData: Client ;
 }
 
 const formSchema = z.object({
@@ -99,13 +99,22 @@ const ClientForm: React.FC<ClientFormProps> = ({ initialData }) => {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: initialData || {
+    defaultValues: {
+      firstName: initialData.firstName,
+      lastName: initialData.lastName,
+      gender: initialData.gender || "",
+      birthday: initialData.birthday ? new Date(initialData.birthday) : new Date(),
+      email: initialData.email,
+      phone: initialData.phone || "",
+      country: initialData.country || "",
+    } || {
       firstName: "",
       lastName: "",
       city: "",
       street: "",
       country: "",
       phone: "",
+      gender: ""
     },
   });
 
@@ -297,34 +306,6 @@ const ClientForm: React.FC<ClientFormProps> = ({ initialData }) => {
                   <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input placeholder="Email" {...field} />
-                  </FormControl>
-                  <FormMessage className="text-xs font-bold text-neutral-600" />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="street"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Street</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Street Name" {...field} />
-                  </FormControl>
-                  <FormMessage className="text-xs font-bold text-neutral-600" />
-
-
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="city"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>City</FormLabel>
-                  <FormControl>
-                    <Input placeholder="City Name" {...field} />
                   </FormControl>
                   <FormMessage className="text-xs font-bold text-neutral-600" />
                 </FormItem>

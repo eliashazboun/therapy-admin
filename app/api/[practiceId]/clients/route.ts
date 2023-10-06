@@ -66,8 +66,6 @@ export async function POST(
         birthday,
         phone,
         email,
-        city,
-        street,
         country,
         practiceId: params.practiceId,
         profilePicture,

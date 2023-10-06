@@ -1,3 +1,4 @@
+import { corsHeaders } from "@/lib/consts"
 import prismadb from "@/lib/prismadb"
 import { auth } from "@clerk/nextjs"
 import { NextResponse } from "next/server"
@@ -47,13 +48,21 @@ export async function GET(
     const practices = await prismadb.practice.findMany({
       select:{
         name: true,
+        id: true
       }
     })
 
-    return NextResponse.json(practices)
+    return NextResponse.json(practices,{
+      status: 200,
+      headers:corsHeaders
+    })
 
   }catch(err){
     console.log("[PRACTICES_GET]",err)
-    return new NextResponse("Internal error", { status: 500 })
+    return new NextResponse("Internal error", { 
+      status: 500,
+      headers:corsHeaders
+    
+    })
   }
 }

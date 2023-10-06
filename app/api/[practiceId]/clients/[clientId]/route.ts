@@ -20,8 +20,6 @@ export async function PATCH(
       birthday,
       phone,
       email,
-      street,
-      city,
       country,
     } = body;
 
@@ -38,8 +36,6 @@ export async function PATCH(
       return new NextResponse("Birthday is required", { status: 400 });
     if (!phone) return new NextResponse("Phone is required", { status: 400 });
     if (!email) return new NextResponse("Email is required", { status: 400 });
-    if (!street) return new NextResponse("Street is required", { status: 400 });
-    if (!city) return new NextResponse("City is required", { status: 400 });
     if (!country)
       return new NextResponse("Country is required", { status: 400 });
 
@@ -66,8 +62,6 @@ export async function PATCH(
         birthday,
         phone,
         email,
-        city,
-        street,
         country,
       },
     });
