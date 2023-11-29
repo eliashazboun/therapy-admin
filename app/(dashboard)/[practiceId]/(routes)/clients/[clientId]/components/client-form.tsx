@@ -48,7 +48,7 @@ import toast from "react-hot-toast";
 type ClientFormValues = z.infer<typeof formSchema>;
 
 interface ClientFormProps {
-  initialData: Client ;
+  initialData: Client | null ;
 }
 
 const formSchema = z.object({
@@ -100,13 +100,13 @@ const ClientForm: React.FC<ClientFormProps> = ({ initialData }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      firstName: initialData.firstName,
-      lastName: initialData.lastName,
-      gender: initialData.gender || "",
-      birthday: initialData.birthday ? new Date(initialData.birthday) : new Date(),
-      email: initialData.email,
-      phone: initialData.phone || "",
-      country: initialData.country || "",
+      firstName: initialData?.firstName,
+      lastName: initialData?.lastName,
+      gender: initialData?.gender || "",
+      birthday: initialData?.birthday ? new Date(initialData.birthday) : new Date(),
+      email: initialData?.email,
+      phone: initialData?.phone || "",
+      country: initialData?.country || "",
     } || {
       firstName: "",
       lastName: "",
