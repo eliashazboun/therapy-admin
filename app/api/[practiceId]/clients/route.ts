@@ -22,8 +22,8 @@ export async function GET(req: Request) {
 //*    | Create a new client |
 export async function POST(
   req: Request,
-  { params }: {params: {practiceId: string}}
-  ) {
+  { params }: { params: { practiceId: string } }
+) {
   try {
     const { userId } = auth();
     const body = await req.json();
@@ -38,8 +38,7 @@ export async function POST(
       street,
       city,
       country,
-      profilePicture
-      
+      profilePicture,
     } = body;
 
     if (!userId) return new NextResponse("Unathenticated", { status: 401 });

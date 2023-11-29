@@ -5,7 +5,9 @@ import { NextResponse } from "next/server";
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { practiceId: string; clientId: string; emergencyId: string } }
+  {
+    params,
+  }: { params: { practiceId: string; clientId: string; emergencyId: string } }
 ) {
   try {
     const { userId } = auth();
@@ -16,8 +18,8 @@ export async function DELETE(
     if (!params.clientId) {
       return new NextResponse("Client Id is required", { status: 400 });
     }
-    if(!params.emergencyId){
-      return new NextResponse("Emergency Id is required", {status: 400})
+    if (!params.emergencyId) {
+      return new NextResponse("Emergency Id is required", { status: 400 });
     }
 
     const practiceByUserId = await prismadb.practice.findFirst({
@@ -48,7 +50,7 @@ export async function DELETE(
       },
     });
 
-    return  NextResponse.json(deletedEmergency, { status: 200 });
+    return NextResponse.json(deletedEmergency, { status: 200 });
   } catch (err: any) {
     return new NextResponse(err.message, { status: 500 });
   }

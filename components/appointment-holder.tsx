@@ -12,8 +12,8 @@ const AppointmentHolder: React.FC<AppointmentHolderProps> = ({
   appointment,
 }) => {
   const past = appointment.startTime < new Date();
-  const router = useRouter()
-  const params = useParams()
+  const router = useRouter();
+  const params = useParams();
   return (
     <div
       className={`grid grid-cols-4 border p-4 rounded-md ${
@@ -46,7 +46,11 @@ const AppointmentHolder: React.FC<AppointmentHolderProps> = ({
           <Eye
             id="view"
             className="hover:bg-slate-200 rounded-md cursor-pointer"
-            onClick={() => router.push(`/${params.practiceId}/clientInfo/${appointment.clientId}`)}
+            onClick={() =>
+              router.push(
+                `/${params.practiceId}/clientInfo/${appointment.clientId}`
+              )
+            }
           />
         </TooltipComponent>
 

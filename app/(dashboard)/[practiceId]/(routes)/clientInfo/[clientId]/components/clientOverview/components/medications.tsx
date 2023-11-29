@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import { Client } from "@prisma/client";
 import { Medication } from "@prisma/client";
@@ -31,23 +31,33 @@ const Medications: React.FC<MedicationsProps> = ({ client }) => {
   const params = useParams();
   return (
     <>
-      <AddMedicineModal clientId={params.clientId} practiceId={params.practiceId}/>
+      <AddMedicineModal
+        clientId={params.clientId}
+        practiceId={params.practiceId}
+      />
 
       <Card className="relative">
         <CardContent>
           <CardHeader className="flex flex-row justify-center items-center text-2xl font-bold ">
-            <h1 className="font-mono text-blue-600">Medications</h1>
-            <Button className="absolute right-4 top-2" onClick={onOpen}>
+            <h1 className="font-mono text-blue-600">
+              Medications
+            </h1>
+            <Button 
+              className="absolute right-4 top-2" 
+              onClick={onOpen}>
               <Plus />
             </Button>
           </CardHeader>
           <div className="grid grid-cols-1">
-
-          {clientWithMeds.medications.map((med) => (
-            <MedHolder clientId={params.clientId} practiceId={params.practiceId} key={med.id} medication={med}/>
-          ))}
+            {clientWithMeds.medications.map((med) => (
+              <MedHolder
+                clientId={params.clientId}
+                practiceId={params.practiceId}
+                key={med.id}
+                medication={med}
+              />
+            ))}
           </div>
-
         </CardContent>
       </Card>
     </>

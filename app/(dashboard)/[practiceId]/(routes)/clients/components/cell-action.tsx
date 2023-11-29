@@ -1,12 +1,14 @@
 "use client";
 import React, { useState } from "react";
-import { ClientColumn } from "./columns";
 import { useParams, useRouter } from "next/navigation";
+
+import { ClientColumn } from "./columns";
 import { AlertModal } from "@/components/modals/alert-modal";
+
+import axios from "axios";
 import toast from "react-hot-toast";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { Copy, Edit, Eye, Trash } from "lucide-react";
-import axios from "axios";
 
 interface CellActionProps {
   data: ClientColumn;
@@ -48,14 +50,16 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
         loading={loading}
       />
       <div className="flex">
-      <TooltipComponent
+        <TooltipComponent
           position="TopCenter"
           content={"View Client"}
           target="#view"
         >
           <div
             id="view"
-            onClick={() => {router.push(`/${params.practiceId}/clientInfo/${data.id}`)}}
+            onClick={() => {
+              router.push(`/${params.practiceId}/clientInfo/${data.id}`);
+            }}
             className=" hover:bg-gray-200 flex justify-center items-center rounded-md p-1 w-fit cursor-pointer "
           >
             <Eye className="h-4 w-4 " />{" "}
@@ -107,7 +111,6 @@ const CellAction: React.FC<CellActionProps> = ({ data }) => {
             <Trash className="h-4 w-4 " />{" "}
           </div>
         </TooltipComponent>
-        
       </div>
     </>
   );

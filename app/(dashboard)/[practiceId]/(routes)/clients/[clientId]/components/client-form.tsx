@@ -48,7 +48,7 @@ import toast from "react-hot-toast";
 type ClientFormValues = z.infer<typeof formSchema>;
 
 interface ClientFormProps {
-  initialData: Client | null ;
+  initialData: Client | null;
 }
 
 const formSchema = z.object({
@@ -61,8 +61,8 @@ const formSchema = z.object({
   birthday: z.date({ required_error: "Birthday is required." }),
 
   email: z
-    .string({required_error:"Email is required."})
-    .min(1,{message:"Email is required."})
+    .string({ required_error: "Email is required." })
+    .min(1, { message: "Email is required." })
     .email({ message: "Must be a valid email." }),
 
   street: z
@@ -103,7 +103,9 @@ const ClientForm: React.FC<ClientFormProps> = ({ initialData }) => {
       firstName: initialData?.firstName,
       lastName: initialData?.lastName,
       gender: initialData?.gender || "",
-      birthday: initialData?.birthday ? new Date(initialData.birthday) : new Date(),
+      birthday: initialData?.birthday
+        ? new Date(initialData.birthday)
+        : new Date(),
       email: initialData?.email,
       phone: initialData?.phone || "",
       country: initialData?.country || "",
@@ -114,7 +116,7 @@ const ClientForm: React.FC<ClientFormProps> = ({ initialData }) => {
       street: "",
       country: "",
       phone: "",
-      gender: ""
+      gender: "",
     },
   });
 
@@ -139,16 +141,18 @@ const ClientForm: React.FC<ClientFormProps> = ({ initialData }) => {
     }
   };
   const onDelete = async () => {
-    try{
-      setLoading(true)
-      await axios.delete(`/api/${params.practiceId}/clients/${params.clientId}`)
-      router.refresh()
-      router.push(`/${params.practiceId}/clients`)
-      toast.success("Client deleted")
-    }catch(err){
-      console.log("[ON_DELETE_CLIENT_FORM]", err)
-      toast.error("Something went wrong")
-    }finally{
+    try {
+      setLoading(true);
+      await axios.delete(
+        `/api/${params.practiceId}/clients/${params.clientId}`
+      );
+      router.refresh();
+      router.push(`/${params.practiceId}/clients`);
+      toast.success("Client deleted");
+    } catch (err) {
+      console.log("[ON_DELETE_CLIENT_FORM]", err);
+      toast.error("Something went wrong");
+    } finally {
       setLoading(false);
     }
   };
@@ -162,24 +166,22 @@ const ClientForm: React.FC<ClientFormProps> = ({ initialData }) => {
         loading={loading}
       />
       <div className="flex  items-center justify-between text-center">
-        <div>
-        </div>
+        <div></div>
         <Heading title={title} description={description} />
         <div>
-        {initialData && (
-          <Button
-            disabled={loading}
-            variant={"destructive"}
-            size={"sm"}
-            onClick={() => setOpen(true)}
-          >
-            <Trash className="h-4 w-4" /> Delete
-          </Button>
-        )}
-
+          {initialData && (
+            <Button
+              disabled={loading}
+              variant={"destructive"}
+              size={"sm"}
+              onClick={() => setOpen(true)}
+            >
+              <Trash className="h-4 w-4" /> Delete
+            </Button>
+          )}
         </div>
       </div>
-      
+
       <Separator />
       <div className="flex min-h-screen flex-col items-center ">
         <Form {...form}>
@@ -253,7 +255,6 @@ const ClientForm: React.FC<ClientFormProps> = ({ initialData }) => {
                     />
                   </FormControl>
                   <FormMessage className="text-xs font-bold text-neutral-600" />
-
                 </FormItem>
               )}
             />
@@ -294,7 +295,7 @@ const ClientForm: React.FC<ClientFormProps> = ({ initialData }) => {
                       />
                     </PopoverContent>
                   </Popover>
-                    <FormMessage className="text-xs font-bold text-neutral-600" />
+                  <FormMessage className="text-xs font-bold text-neutral-600" />
                 </FormItem>
               )}
             />

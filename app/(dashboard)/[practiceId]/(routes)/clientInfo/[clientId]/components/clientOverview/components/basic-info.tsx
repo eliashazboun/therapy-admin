@@ -2,11 +2,8 @@ import React from 'react'
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 import { Heading } from "@/components/ui/heading";
 import { Mail, Phone } from "lucide-react";
 import { Client } from '@prisma/client';
@@ -35,15 +32,15 @@ const BasicInfo:React.FC<BasicInfoProps> = ({client}) => {
               <Heading title={client ? client.firstName + " " + client.lastName : "Loading..."} />
               <div className="flex gap-4">
                 <Phone />
-                <p>{client?.phone}</p>
+                <p>{client?.phone ? client.phone : "Loading..."}</p>
               </div>
               <div className="flex gap-4">
                 <Mail />
-                <p>{client?.email}</p>
+                <p>{client?.email ? client?.email : "Loading..."}</p>
               </div>
               <div className="flex gap-4">
                 <p className="font-bold">Joined:</p>
-                <p>{client?.createdAt.toLocaleDateString()}</p>
+                <p>{client ?  client?.createdAt.toLocaleDateString() : "Loading..."}</p>
               </div>
              
             </div>

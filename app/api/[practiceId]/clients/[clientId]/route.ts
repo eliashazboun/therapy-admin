@@ -13,31 +13,34 @@ export async function PATCH(
     const body = await req.json();
 
     //Destucture the body that contains a Client object
-    const {
-      firstName,
-      lastName,
-      gender,
-      birthday,
-      phone,
-      email,
-      country,
-    } = body;
+    const { firstName, lastName, gender, birthday, phone, email, country } =
+      body;
 
     //check if the user is authenticated
-    if (!userId) return new NextResponse("Unathenticated", { status: 401 });
-
-    //check if the required fields are filled
-    if (!firstName)
+    if (!userId) {
+      return new NextResponse("Unathenticated", { status: 401 });
+    }
+    if (!firstName) {
       return new NextResponse("First Name is required", { status: 400 });
-    if (!lastName)
+    }
+    if (!lastName) {
       return new NextResponse("Last Name is required", { status: 400 });
-    if (!gender) return new NextResponse("Gender is required", { status: 400 });
-    if (!birthday)
+    }
+    if (!gender) {
+      return new NextResponse("Gender is required", { status: 400 });
+    }
+    if (!birthday) {
       return new NextResponse("Birthday is required", { status: 400 });
-    if (!phone) return new NextResponse("Phone is required", { status: 400 });
-    if (!email) return new NextResponse("Email is required", { status: 400 });
-    if (!country)
+    }
+    if (!phone) {
+      return new NextResponse("Phone is required", { status: 400 });
+    }
+    if (!email) {
+      return new NextResponse("Email is required", { status: 400 });
+    }
+    if (!country) {
       return new NextResponse("Country is required", { status: 400 });
+    }
 
     //check if userid matches the practiceid
     const practiceByUserId = await prismadb.practice.findFirst({
@@ -84,7 +87,8 @@ export async function DELETE(
 
     //check if the user is authenticated
     if (!userId) return new NextResponse("Unathenticated", { status: 401 });
-    if(!params.clientId) return new NextResponse("Client Id is required", { status: 400 });
+    if (!params.clientId)
+      return new NextResponse("Client Id is required", { status: 400 });
 
     const practiceByUserId = await prismadb.practice.findFirst({
       where: {
@@ -96,14 +100,13 @@ export async function DELETE(
     if (!practiceByUserId)
       return new NextResponse("Unauthorized", { status: 403 });
 
-
     //delete the client
     const client = await prismadb.client.deleteMany({
       where: {
         id: params.clientId,
       },
     });
-    console.log(params.clientId)
+    console.log(params.clientId);
 
     //return the deleted client
     return NextResponse.json(client);

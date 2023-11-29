@@ -38,9 +38,10 @@ export async function POST(
         dosage,
         frequency,
         clientId: params.clientId,
-    }});
+      },
+    });
 
-    return NextResponse.json(addToClient)
+    return NextResponse.json(addToClient);
   } catch (err: any) {
     console.log("[DISORDERS_POST]", err);
     return new NextResponse(err, { status: 500 });

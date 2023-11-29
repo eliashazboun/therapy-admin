@@ -20,9 +20,9 @@ const ClientsPage = async ({
   const formattedClients : ClientColumn[] = clients.map((client) => ({
     id: client.id.toString(),
     name: client.firstName + " " + client.lastName,
-    gender: client.gender.charAt(0).toUpperCase(),
-    birthday: client.birthday.toLocaleDateString(),
-    phone: client.phone.toString(),
+    gender: client?.gender ? client.gender.charAt(0).toUpperCase(): "Loading...",
+    birthday: client?.birthday ? client.birthday.toLocaleDateString() : "Loading...",
+    phone: client?.phone ? client.phone.toString() : "Loading...",
   }))
 
 
