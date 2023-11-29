@@ -32,7 +32,7 @@ const BasicInfo:React.FC<BasicInfoProps> = ({client}) => {
               alt="Profile Picture"
             />
             <div className="grid  ">
-              <Heading title={client?.firstName + " " + client?.lastName} />
+              <Heading title={client ? client.firstName + " " + client.lastName : "Loading..."} />
               <div className="flex gap-4">
                 <Phone />
                 <p>{client?.phone}</p>
