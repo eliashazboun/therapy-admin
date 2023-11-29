@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function capitalize(string: string | undefined) {
+export function capitalize(string: string | undefined | null) {
   if(!string){
     return string
   }

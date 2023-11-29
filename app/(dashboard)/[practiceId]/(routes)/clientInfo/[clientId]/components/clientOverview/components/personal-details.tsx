@@ -9,17 +9,21 @@ import {
 } from "@/components/ui/card";
 import { capitalize } from '@/lib/utils';
 
-
 interface PersonalDetailsProps {
   client:   Client | null
 }
+
+
 
 const PersonalDetails:React.FC<PersonalDetailsProps> = ({
   client
 }) => {
 
+  
+
   //create a function that returns the age of the client
-  const getAge = (birthday: Date | undefined) => {
+  const getAge = (birthday: Date | undefined | null) => {
+
     const today = new Date();
     if(!birthday){
       return 0;
@@ -42,15 +46,15 @@ const PersonalDetails:React.FC<PersonalDetailsProps> = ({
             <div className="grid grid-cols-3 gap-4 ">
               <div className="">
                 <p className='font-bold underline'>Gender</p>
-                <p>{capitalize(client?.gender)}</p>
+                <p>{capitalize(client ? client.gender : "Loading")}</p>
               </div>
               <div className="">
                 <p className='font-bold underline'>Date of Birth</p>
-                <p>{client?.birthday.toLocaleDateString()}</p>
+                <p>{client?.birthday ? client.birthday.toLocaleDateString() : "Loading..."}</p>
               </div>
               <div className="">
                 <p className="font-bold underline">Country</p>
-                <p>{client?.country}</p>
+                <p>{client?.country ? client?.country : "Loading..."}</p>
               </div>
               <div className="">
                 <p className="font-bold underline">Age</p>
@@ -58,11 +62,11 @@ const PersonalDetails:React.FC<PersonalDetailsProps> = ({
                 </div>
               <div className="">
                 <p className="font-bold underline">City</p>
-                <p>{client?.city}</p>
+                <p>{client?.city ? client.city : "Loading..."}</p>
               </div>
               <div className="">
                 <p className="font-bold underline"> Language</p>
-                <p>{client?.prefferedLanguage}</p>
+                <p>{client?.prefferedLanguage ? client.prefferedLanguage : "Loading..."}</p>
               </div>
              
              

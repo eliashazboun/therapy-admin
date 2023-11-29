@@ -46,6 +46,7 @@ model Client {
   gender            String?
   birthday          DateTime?
   phone             String?
+  city              String?
   email             String
   country           String?
   prefferedLanguage String?
